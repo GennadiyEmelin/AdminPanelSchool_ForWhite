@@ -8,8 +8,8 @@ namespace School
 {
     public class Students
     {
-        private string Name;
-        private string Surname;
+        public string Name;
+        public string Surname;
 
         public Students(string name, string surname)
         {
