@@ -16,7 +16,7 @@ namespace School
 
             while (true) //Цикл программы
             {
-                string? input = Console.ReadLine();
+                string? input = Console.ReadLine();//Команда пользователя
                 switch (input)
                 {
                     case "1":
@@ -32,14 +32,14 @@ namespace School
             }
         }
 
-        static string FirstLaunch()
+        static string FirstLaunch()//Первый запуск
         {
             Console.WriteLine("Введите название школы: ");
             string? schoolName = Console.ReadLine();
             return schoolName;
         }
 
-        static void AddStudents(string Name, string Surname)
+        static void AddStudents(string Name, string Surname)//Добавление ученика
         {
             
         }
