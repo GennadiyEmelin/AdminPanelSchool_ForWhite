@@ -17,6 +17,7 @@ namespace School
 
             while (true) //Цикл программы
             {
+                Console.WriteLine($"Школа:{SchoolName}");
                 Console.WriteLine("Хотите посмотреть список всех учеников школы?");
                 string? input = Console.ReadLine();//Команда пользователя
                 switch (input)
@@ -42,10 +43,17 @@ namespace School
                                 break;
                             case "Нет" or "нет":
                                 break;
+                            default:
+                                Console.WriteLine("Введите Да или Нет.");
+                                break;
                         }
                         break;
                     case "Нет" or "нет":
                         return;
+                    default:
+                        Console.WriteLine("Введите Да или Нет.");
+                        break;
+
                 }
             }
         }
