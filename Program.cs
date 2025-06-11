@@ -8,61 +8,53 @@ namespace School
 {
     class Program
     {
-        static void Main(string[] args) 
+        static void Main(string[] args)
         {
-            string SchoolName;//Наименование школы
-            List<Students> students = new List<Students>(); //Список учеников
-            SchoolName = FirstLaunch(); //присваивание имени школы при запуске
-            Console.WriteLine($"Школа {SchoolName} успешно создана");
+            Console.WriteLine("Введите название школы:");
+            string schoolName = Console.ReadLine();
 
-            while (true) //Цикл программы
+            School school = new School { Name = schoolName };
+
+            Console.WriteLine($"Школа {school.Name} успешно создана.");
+
+            while (true)
             {
-                Console.WriteLine($"Школа:{SchoolName}");
-                Console.WriteLine("Хотите посмотреть список всех учеников школы?");
-                string? input = Console.ReadLine();//Команда пользователя
-                switch (input)
+                if (IsUserAgree($"\nХотите посмотреть список всех учеников школы {school.Name}?"))
                 {
-                    case "да" or "Да":
-                        for (int i = 0; i < students.Count; i++)
+                    if (school.Students.Count == 0)
+                    {
+                        Console.WriteLine("Список учеников пуст.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Список учеников:");
+                        foreach (var student in school.Students)
                         {
-                            Console.WriteLine($"Ученик: {i + 1}");
-                            Console.WriteLine($"Имя: " + students[i].Name);
-                            Console.WriteLine($"Фамилия: " + students[i].Surname);
+                            Console.WriteLine($"- {student}");
                         }
-                        Console.WriteLine("Хотите добавить нового ученика?");
-                        string? input_2 = Console.ReadLine();
-                        switch (input_2)
-                        {
-                            case "Да" or "да":
-                                Console.WriteLine("Введите имя ученика: ");
-                                string? NameStudent = Console.ReadLine();
-                                Console.WriteLine("Введите фамилию ученика: ");
-                                string? SurnameStudent = Console.ReadLine();
-                                students.Add(new Students(NameStudent, SurnameStudent));
-                                Console.WriteLine($"Ученик {NameStudent} успешно добавлени в {SchoolName}");
-                                break;
-                            case "Нет" or "нет":
-                                break;
-                            default:
-                                Console.WriteLine("Введите Да или Нет.");
-                                break;
-                        }
-                        break;
-                    case "Нет" or "нет":
-                        return;
-                    default:
-                        Console.WriteLine("Введите Да или Нет.");
-                        break;
+                    }
+                }
 
+                if (IsUserAgree($"\nХотите добавить нового ученика в школу {school.Name}?"))
+                {
+                    Console.Write("Введите имя ученика: ");
+                    string firstName = Console.ReadLine();
+
+                    Console.Write("Введите фамилию ученика: ");
+                    string lastName = Console.ReadLine();
+
+                    school.Students.Add(new Student { FirstName = firstName, LastName = lastName });
+
+                    Console.WriteLine($"Ученик {firstName} успешно добавлен в школу {school.Name}.");
                 }
             }
         }
 
-        static string FirstLaunch()//Первый запуск
+        static bool IsUserAgree(string question)
         {
-            Console.WriteLine("Введите название школы: ");
-            string? schoolName = Console.ReadLine();
-            return schoolName;
+            Console.WriteLine(question);
+            string answer = Console.ReadLine().Trim().ToLower();
+            return answer == "да"  answer == "yes"  answer == "y" || answer == "д";
         }
     }
 }
