@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -38,10 +39,22 @@ namespace School
                 if (IsUserAgree($"\nХотите добавить нового ученика в школу {school.Name}?"))
                 {
                     Console.Write("Введите имя ученика: ");
-                    string firstName = Console.ReadLine();
+                    string FirstName = Console.ReadLine();
+                    if (IsDigit(FirstName)) 
+                    {
+                        Console.WriteLine("Имя не может содержать цифры!");
+                        return; 
+                    }
+                    string firstName = FirstName;
 
                     Console.Write("Введите фамилию ученика: ");
-                    string lastName = Console.ReadLine();
+                    string LastName = Console.ReadLine();
+                    if (IsDigit(LastName))
+                    {
+                        Console.WriteLine("Фамилия не может содержать цифры!");
+                        return;
+                    }
+                    string lastName = LastName;
 
                     school.Students.Add(new Student { FirstName = firstName, LastName = lastName });
 
@@ -54,7 +67,20 @@ namespace School
         {
             Console.WriteLine(question);
             string answer = Console.ReadLine().Trim().ToLower();
-            return answer == "да"  answer == "yes"  answer == "y" || answer == "д";
+            return answer == "да" || answer == "yes" || answer == "y" || answer == "д";
+        }
+
+        static bool IsDigit(string answer)
+        {
+            char[] a = answer.ToCharArray();
+            foreach (char c in a) 
+            {
+                if (char.IsDigit(c))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
